@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>To-Do App</title>
+  <style>
+    body { font-family: system-ui, sans-serif; max-width: 560px; margin: 2rem auto; padding: 0 1rem; line-height: 1.5; }
+    form { display: flex; gap: 0.5rem; margin: 1rem 0; }
+    input, button { padding: 0.6rem; font-size: 1rem; }
+    input { flex: 1; }
+    button { cursor: pointer; }
+    li { display: flex; gap: 0.5rem; align-items: center; margin: 0.5rem 0; }
+    li.done span { text-decoration: line-through; color: #666; }
+    li span { flex: 1; }
+    .filters button.active { font-weight: 700; text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <h1>To-Do App</h1>
+  <p>Add tasks, tick them off when done, and delete the ones you no longer need.</p>
+  <form id="todo-form">
+    <input id="todo-input" type="text" placeholder="What needs doing?" required>
+    <button type="submit">Add</button>
+  </form>
+  <div class="filters">
+    <button type="button" data-filter="all" class="active">All</button>
+    <button type="button" data-filter="active">Active</button>
+    <button type="button" data-filter="completed">Completed</button>
+    <button type="button" id="clear-completed">Clear completed</button>
+  </div>
+  <p id="count"></p>
+  <ul id="todo-list"></ul>
+  <script>
+    const form = document.getElementById('todo-form');
+    const input = document.getElementById('todo-input');
+    const list = document.getElementById('todo-list');
+    const count = document.getElementById('count');
+    let todos = JSON.parse(localStorage.getItem('todos') || '[]');
+    let filter = 'all';
+    function save() { localStorage.setItem('todos', JSON.stringify(todos)); }
+    function render() {
+      list.innerHTML = '';
+      todos.filter((t) => filter === 'all' || (filter === 'active' ? !t.done : t.done))
+        .forEach((todo) => {
+          const li = document.createElement('li');
+          if (todo.done) li.className = 'done';
+          const box = document.createElement('input');
+          box.type = 'checkbox'; box.checked = todo.done;
+          box.onchange = () => { todo.done = box.checked; save(); render(); };
+          const label = document.createElement('span');
+          label.textContent = todo.text;
+          const del = document.createElement('button');
+          del.textContent = 'Delete';
+          del.onclick = () => { todos = todos.filter((t) => t !== todo); save(); render(); };
+          li.append(box, label, del);
+          list.appendChild(li);
+        });
+      const left = todos.filter((t) => !t.done).length;
+      count.textContent = left + ' task' + (left === 1 ? '' : 's') + ' left';
+    }
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      todos.push({ text: input.value.trim(), done: false });
+      input.value = '';
+      save(); render();
+    });
+    document.querySelectorAll('.filters [data-filter]').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        filter = btn.dataset.filter;
+        document.querySelectorAll('.filters [data-filter]').forEach((b) => b.classList.remove('active'));
+        btn.classList.add('active');
+        render();
+      });
+    });
+    document.getElementById('clear-completed').addEventListener('click', () => {
+      todos = todos.filter((t) => !t.done); save(); render();
+    });
+    render();
+  </script>
+</body>
+</html>

@@ -1,59 +1,56 @@
-# To-Do App
+# ✅ Todo App
 
-A to-do list app with add, complete and delete features.
+A clean, fully working to-do list app built with plain HTML, CSS and JavaScript — no frameworks, no build step. Just open it in a browser and start organising your day.
+
+## Description
+
+Todo App lets you capture tasks in seconds and stay on top of them: add tasks, tick them off as you finish, fix typos with inline editing, and filter your list to focus on what's still left. Everything is saved automatically in your browser's `localStorage`, so your tasks are still there when you refresh or come back later.
 
 ## Features
 
-- Add a task in seconds with the input box and Add button
-- Mark a task as complete with one click - completed tasks are struck through
-- Delete tasks you no longer need
-- Filter the list: All, Active or Completed
-- See at a glance how many tasks are left to do
-- Clear all completed tasks in one click
-- Tasks are saved in the browser with localStorage, so they survive a refresh
+- ➕ **Add tasks** — type and click **Add** or press **Enter**
+- ☑️ **Complete tasks** — checkbox on every item; completed tasks are struck through and dimmed
+- ✏️ **Inline editing** — click **Edit** (or double-click a task) to change its text; **Enter** saves, **Esc** cancels
+- 🗑️ **Delete tasks** — one click per item
+- 🔍 **Filters** — switch between **All / Active / Completed** views
+- 🔢 **Items-left counter** in the footer, always up to date
+- 🧹 **Clear Completed** button to tidy up finished tasks in one go
+- 💾 **Persistent storage** — tasks survive refresh via `localStorage`
+- 📱 **Responsive design** — works on mobile and desktop
+- 🌈 Friendly empty-state messages for each filter view
+
+## How to Run
+
+No installation needed:
+
+1. Download or clone this repository.
+2. Open `index.html` in any modern browser (double-click the file).
+
+That's it — the whole app (HTML, CSS and JavaScript) lives in that single file.
 
 ## Tech Stack
 
-- HTML5 - structure and task form
-- CSS3 - layout and styling (inline in `index.html` for simplicity)
-- JavaScript - add, complete, delete, filter and localStorage (inline in `index.html`)
-- No build tools, frameworks or server required
-
-## How to Run / Usage
-
-1. Clone the repository:
-
-   ```bash
-   git clone https://github.com/UUUU41/todo-app.git
-   cd todo-app
-   ```
-
-2. Open `index.html` in any modern web browser, or serve the folder:
-
-   ```bash
-   python3 -m http.server 8000
-   ```
-
-   Then visit `http://localhost:8000`.
-
-3. Type a task, for example `Finish maths homework`, and click Add. Click a task's checkbox to complete it, or Delete to remove it. Use the All / Active / Completed buttons to filter the list.
+- **HTML5** — semantic structure
+- **CSS3** — custom properties, flexbox, gradients, responsive media queries
+- **Vanilla JavaScript** — DOM rendering, event handling and `localStorage` persistence
 
 ## Project Structure
 
-```text
+```
 todo-app/
-- index.html   (structure, styling and all app logic in one file)
-- README.md    (project documentation)
+├── index.html   # the complete app (markup + styles + script in one file)
+└── README.md
 ```
 
 ## Future Improvements
 
-- Add due dates and priorities
-- Add drag-and-drop reordering
-- Add task categories and search
-- Add a dark mode
-- Sync tasks across devices with a backend
+- Due dates and priority levels for tasks
+- Drag-and-drop reordering
+- Dark / light theme toggle
+- Categories or tags
+- Optional cloud sync so tasks follow you across devices
 
 ## Author
 
-Chandan Yadav (UUUU41) - https://github.com/UUUU41
+**Chandan Yadav** — BCA student & frontend developer
+GitHub: [@UUUU41](https://github.com/UUUU41)
